@@ -1,0 +1,74 @@
+<section class="breadcrumb-bar container">
+  <span class="kicker">Contacto</span>
+</section>
+<section class="section--tight">
+  <div class="container">
+    <h1>Contáctanos</h1>
+    <p class="lede">Escríbenos por el canal que prefieras. Estamos en Quibdó, Chocó.</p>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container split">
+    <div>
+      <div class="card-grid card-grid--2" style="grid-template-columns:1fr;">
+        <div class="card">
+          <h3>Teléfono</h3>
+          <p><a href="#" data-contact-phone style="color:var(--forest); font-weight:600;">PENDIENTE_CONTACT_PHONE</a></p>
+        </div>
+        <div class="card">
+          <h3>WhatsApp</h3>
+          <p><a href="#" data-whatsapp-link data-whatsapp-message="Hola, quiero más información sobre LlévameQ" style="color:var(--forest); font-weight:600;">Escríbenos por WhatsApp</a></p>
+        </div>
+        <div class="card">
+          <h3>Correo electrónico</h3>
+          <p><a href="#" data-contact-email style="color:var(--forest); font-weight:600;">PENDIENTE_CONTACT_EMAIL</a></p>
+        </div>
+        <div class="card">
+          <h3>Redes sociales</h3>
+          <p style="display:flex; gap:14px;">
+            <a href="#" data-social="FACEBOOK_URL" style="color:var(--forest); font-weight:600;">Facebook</a>
+            <a href="#" data-social="INSTAGRAM_URL" style="color:var(--forest); font-weight:600;">Instagram</a>
+            <a href="#" data-social="TIKTOK_URL" style="color:var(--forest); font-weight:600;">TikTok</a>
+          </p>
+        </div>
+        <div class="card">
+          <h3>Operación</h3>
+          <p>Quibdó, Chocó, Colombia</p>
+        </div>
+      </div>
+    </div>
+
+    <form class="form-card" data-validate data-success-message="Mensaje enviado. Te responderemos pronto.">
+      <h3>Envíanos un mensaje</h3>
+      <div class="field">
+        <label for="c-nombre">Nombre</label>
+        <input type="text" id="c-nombre" name="nombre" required minlength="2">
+        <span class="field-error"></span>
+      </div>
+      <div class="field">
+        <label for="c-correo">Correo electrónico</label>
+        <input type="email" id="c-correo" name="correo" required>
+        <span class="field-error"></span>
+      </div>
+      <div class="field">
+        <label for="c-asunto">Asunto</label>
+        <select id="c-asunto" name="asunto" required>
+          <option value="">Selecciona una opción</option>
+          <option value="pasajero">Soy pasajero</option>
+          <option value="conductor">Soy conductor</option>
+          <option value="prensa">Prensa / alianzas</option>
+          <option value="otro">Otro</option>
+        </select>
+        <span class="field-error"></span>
+      </div>
+      <div class="field">
+        <label for="c-mensaje">Mensaje</label>
+        <textarea id="c-mensaje" name="mensaje" required minlength="10"></textarea>
+        <span class="field-error"></span>
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+      <p class="form-status" data-form-status hidden></p>
+    </form>
+  </div>
+</section>

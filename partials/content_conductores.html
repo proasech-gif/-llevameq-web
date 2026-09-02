@@ -1,0 +1,145 @@
+<section class="breadcrumb-bar container">
+  <span class="kicker">Conductores</span>
+</section>
+<section class="section--tight">
+  <div class="container hero" style="padding-top:0;">
+    <div>
+      <h1>Conduce con LlévameQ</h1>
+      <p class="lede">Convierte tu taxi o tu moto en una fuente de ingresos. Recibe solicitudes, envía tu propuesta de precio y elige tus propios horarios.</p>
+      <div class="hero-actions">
+        <a href="#registro" class="btn btn-primary">Quiero ser conductor</a>
+      </div>
+    </div>
+    <div class="visual-panel gold">
+      <svg width="200" height="140" viewBox="0 0 200 140" fill="none" aria-hidden="true">
+        <rect x="30" y="60" width="140" height="40" rx="10" fill="#0F231F" opacity="0.85"/>
+        <circle cx="60" cy="105" r="14" fill="#0F231F"/>
+        <circle cx="140" cy="105" r="14" fill="#0F231F"/>
+        <rect x="55" y="35" width="90" height="35" rx="8" fill="#0F231F" opacity="0.85"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head center mx-auto">
+      <span class="kicker">Lo que encuentras</span>
+      <h2>Herramientas para trabajar con tranquilidad</h2>
+    </div>
+    <div class="card-grid card-grid--3">
+      <div class="card"><h3>Recibe solicitudes</h3><p>Visualiza pasajeros cerca de ti y envía tu propuesta de precio y tiempo de llegada.</p></div>
+      <div class="card"><h3>Navegación integrada</h3><p>Ubica al pasajero y su destino directamente desde el mapa de la app.</p></div>
+      <div class="card"><h3>Gestión de viajes</h3><p>Controla tus viajes activos, tu historial y tus ganancias en un solo lugar.</p></div>
+      <div class="card"><h3>Zona de trabajo</h3><p>Define la zona en la que quieres recibir solicitudes.</p></div>
+      <div class="card"><h3>Categorías por calificación</h3><p>Crece de Cobre a Diamante según tu calificación y viajes completados.</p></div>
+      <div class="card"><h3>Herramientas de seguridad</h3><p>Botón SOS y verificación de identidad para cada viaje.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Requisitos generales</span>
+      <h2>¿Qué necesitas para unirte?</h2>
+    </div>
+    <ul class="feature-list" style="max-width:640px;">
+      <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span>Documento de identidad vigente</li>
+      <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span>Vehículo propio (taxi o moto) con documentos al día</li>
+      <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span>Disponibilidad para operar en Quibdó</li>
+      <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l6 6L20 6"/></svg></span>Disposición para pasar el proceso de verificación de LlévameQ</li>
+    </ul>
+    <p class="legal-note" style="max-width:640px;">Los requisitos definitivos y la documentación exacta serán confirmados por el equipo de LlévameQ durante el proceso de verificación.</p>
+  </div>
+</section>
+
+<section class="section section--alt" id="registro">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Formulario</span>
+      <h2>Únete como conductor</h2>
+      <p>Completa tus datos y nuestro equipo revisará tu solicitud.</p>
+    </div>
+
+    <form class="form-card" data-validate data-success-message="¡Solicitud recibida! Nuestro equipo revisará tu información y se pondrá en contacto contigo.">
+      <div class="form-grid">
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" required minlength="3" autocomplete="name">
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="telefono">Número de teléfono</label>
+          <input type="tel" id="telefono" name="telefono" required pattern="[0-9 +]{7,15}" data-pattern-message="Ingresa un número de teléfono válido." autocomplete="tel">
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" required autocomplete="email">
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="documento">Documento de identidad</label>
+          <input type="text" id="documento" name="documento" required minlength="5">
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="tipoVehiculo">Tipo de vehículo</label>
+          <select id="tipoVehiculo" name="tipoVehiculo" required>
+            <option value="">Selecciona una opción</option>
+            <option value="moto">Moto</option>
+            <option value="taxi">Taxi / carro</option>
+          </select>
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="marca">Marca del vehículo</label>
+          <input type="text" id="marca" name="marca" required>
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="modelo">Modelo</label>
+          <input type="text" id="modelo" name="modelo" required>
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="placa">Placa</label>
+          <input type="text" id="placa" name="placa" required minlength="5">
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="ciudad">Ciudad</label>
+          <input type="text" id="ciudad" name="ciudad" required value="Quibdó" autocomplete="address-level2">
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="disponibilidad">Disponibilidad</label>
+          <select id="disponibilidad" name="disponibilidad" required>
+            <option value="">Selecciona una opción</option>
+            <option value="tiempo-completo">Tiempo completo</option>
+            <option value="medio-tiempo">Medio tiempo</option>
+            <option value="fines-de-semana">Fines de semana</option>
+          </select>
+          <span class="field-error"></span>
+        </div>
+        <div class="field full">
+          <label for="experiencia">Experiencia como conductor (opcional)</label>
+          <textarea id="experiencia" name="experiencia" placeholder="Cuéntanos brevemente tu experiencia conduciendo o en plataformas similares"></textarea>
+        </div>
+        <div class="field full">
+          <label>Documentos (opcional por ahora)</label>
+          <div class="field-file">Cargar licencia de conducción, tarjeta de propiedad y SOAT — disponible próximamente en este formulario.</div>
+        </div>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="terminos" name="terminos" required>
+        <label for="terminos">He leído y acepto los <a href="terminos.html" style="color:var(--forest);">Términos y condiciones</a> y la <a href="privacidad.html" style="color:var(--forest);">Política de privacidad</a> de LlévameQ.</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+      <p class="form-status" data-form-status hidden></p>
+    </form>
+  </div>
+</section>
