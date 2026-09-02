@@ -160,8 +160,16 @@ p { margin: 0 0 1em 0; max-width: 62ch; }
     transition: transform 0.25s ease; overflow-y: auto; }
   .nav-links.open { transform: translateX(0); }
   .nav-links a { width: 100%; padding: 14px 4px; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
-  .nav-cta .btn-outline { display: none; }
+  .nav-cta .btn-outline, .nav-cta .btn-primary { display: none; }
   .nav-toggle { display: inline-flex; }
+  .nav { flex-wrap: nowrap; }
+  .logo { font-size: 1.08rem; gap: 8px; }
+  .logo-mark { width: 30px; height: 30px; }
+  .nav-links-cta { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 18px; }
+  .nav-links-cta .btn { width: 100%; justify-content: center; border-bottom: none !important; padding: 14px 20px !important; }
+}
+@media (min-width: 901px) {
+  .nav-links-cta { display: none; }
 }
 
 /* Route motif — used as a structural signature element (process steps, journeys) */
