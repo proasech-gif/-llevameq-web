@@ -220,8 +220,13 @@
     initMobileNav();
     initAccordions();
     initFaqSearch();
-    applyConfig();
     initForms();
     initYear();
+
+    // Espera a que el contenido editable (CMS) termine de cargar desde
+    // Supabase antes de aplicar los datos de contacto, para que no se
+    // muestre primero el valor viejo y luego "salte" al nuevo.
+    // Si cms.js no está presente en la página, sigue de inmediato.
+    Promise.resolve(window.LLEVAMEQ_CMS_READY).then(applyConfig);
   });
 })();

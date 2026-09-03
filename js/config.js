@@ -25,8 +25,8 @@ window.LLEVAMEQ_CONFIG = {
 
   // Backend / Supabase (SOLO valores públicos)
   API_BASE_URL: "PENDIENTE_API_BASE_URL",
-  SUPABASE_URL: "PENDIENTE_SUPABASE_URL",
-  SUPABASE_ANON_KEY: "PENDIENTE_SUPABASE_ANON_KEY", // clave pública (anon), nunca la service_role
+  SUPABASE_URL: "https://hrtvetpxaviexbgqojic.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_LkNnfXN05j2k21ZPtGAtzA_38rdyJOp", // clave pública (anon), nunca la service_role
 
   // Mapas (la key real se recomienda restringir por dominio en la consola del proveedor)
   MAPS_PROVIDER_KEY: "PENDIENTE_MAPS_PROVIDER_KEY",
