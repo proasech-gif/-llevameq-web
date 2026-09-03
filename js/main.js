@@ -130,6 +130,41 @@
     });
   }
 
+  /* ---------- Envío real a Supabase (REST) ---------- */
+  function supabaseInsert(table, payload) {
+    var url = cfg.SUPABASE_URL;
+    var key = cfg.SUPABASE_ANON_KEY;
+    if (!url || url.indexOf("PENDIENTE") === 0 || !key || key.indexOf("PENDIENTE") === 0) {
+      return Promise.reject(new Error("Supabase no está configurado todavía."));
+    }
+    return fetch(url.replace(/\/$/, "") + "/rest/v1/" + table, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": key,
+        "Authorization": "Bearer " + key,
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify(payload)
+    }).then(function (res) {
+      if (!res.ok) {
+        return res.text().then(function (t) {
+          throw new Error("Error de Supabase (" + res.status + "): " + t);
+        });
+      }
+      return true;
+    });
+  }
+
+  function collectFormPayload(form) {
+    var data = {};
+    form.querySelectorAll("input[name], select[name], textarea[name]").forEach(function (field) {
+      if (field.type === "checkbox") return; // los checkbox de aceptación no se guardan como dato
+      data[field.name] = field.value;
+    });
+    return data;
+  }
+
   /* ---------- Validación de formularios ---------- */
   function showFieldError(field, message) {
     var wrap = field.closest(".field");
@@ -179,26 +214,39 @@
         return;
       }
 
-      // Formulario listo para conectarse a backend (Supabase / API propia).
-      // Por ahora simulamos el envío para no perder datos silenciosamente.
+      // Envío real a Supabase cuando el formulario tiene data-table configurado;
+      // si no, se mantiene la simulación anterior como respaldo.
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Enviando..."; }
       if (statusEl) { statusEl.hidden = true; }
 
-      setTimeout(function () {
-        // TODO(backend): reemplazar por fetch(cfg.API_BASE_URL + "/drivers", {...})
-        // o supabase.from("driver_applications").insert({...})
+      var table = form.getAttribute("data-table");
+      var finish = function (ok, message) {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = submitBtn.getAttribute("data-original-label") || "Enviar solicitud";
         }
         if (statusEl) {
           statusEl.hidden = false;
-          statusEl.className = "form-status success";
-          statusEl.textContent = form.getAttribute("data-success-message") ||
-            "¡Solicitud recibida! Nuestro equipo revisará tu información y se pondrá en contacto contigo.";
+          statusEl.className = "form-status " + (ok ? "success" : "error");
+          statusEl.textContent = ok
+            ? (form.getAttribute("data-success-message") || "¡Listo! Tu información fue enviada correctamente.")
+            : message;
         }
-        form.reset();
-      }, 900);
+        if (ok) form.reset();
+      };
+
+      if (table) {
+        var payload = collectFormPayload(form);
+        supabaseInsert(table, payload).then(function () {
+          finish(true);
+        }).catch(function (err) {
+          console.error(err);
+          finish(false, "No pudimos guardar tu información en este momento. Intenta de nuevo o escríbenos por WhatsApp.");
+        });
+      } else {
+        // TODO(backend): sin data-table configurado, no hay dónde guardar todavía.
+        setTimeout(function () { finish(true); }, 900);
+      }
     });
 
     var submitBtn = form.querySelector("[type=submit]");
@@ -220,7 +268,12 @@
     initMobileNav();
     initAccordions();
     initFaqSearch();
-    applyConfig();
+
+    // Espera a que el contenido editable (CMS) termine de cargar desde
+    // Supabase antes de aplicar los datos de contacto, para que no se
+    // muestre primero el valor viejo y luego "salte" al nuevo.
+    // Si cms.js no está presente en la página, sigue de inmediato.
+    Promise.resolve(window.LLEVAMEQ_CMS_READY).then(applyConfig);
     initForms();
     initYear();
   });
