@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-cd /home/claude/llevameq
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
 declare -A TITLES=(
   [index]="Inicio"
