@@ -59,42 +59,6 @@
         el.textContent = valor;
       }
     });
-
-    // 3) Enlaces cuyo destino (href) viene de una clave editable
-    // (por ejemplo, el botón "Descargar para Android" con el link del APK).
-    // Si no hay valor configurado, el elemento se oculta en vez de dejar
-    // un enlace roto o un botón que no lleva a ningún lado.
-    document.querySelectorAll("[data-cms-href]").forEach(function (el) {
-      var clave = el.getAttribute("data-cms-href");
-      var valor = porClave[clave];
-      if (valor) {
-        el.setAttribute("href", valor);
-        el.style.display = "";
-      } else if (el.hasAttribute("data-cms-oculta-si-vacio")) {
-        el.style.display = "none";
-      }
-    });
-
-    // 4) Códigos QR generados a partir de una clave editable con una URL.
-    // Se dibujan con un servicio público de generación de QR (no requiere
-    // librerías adicionales en el sitio). Si no hay URL configurada, todo
-    // el bloque del QR se oculta.
-    document.querySelectorAll("[data-cms-qr]").forEach(function (el) {
-      var clave = el.getAttribute("data-cms-qr");
-      var valor = porClave[clave];
-      var contenedor = el.closest("[data-cms-qr-wrap]") || el.parentElement;
-      if (valor) {
-        var ancho = el.getAttribute("width") || "160";
-        var alto = el.getAttribute("height") || "160";
-        el.setAttribute(
-          "src",
-          "https://api.qrserver.com/v1/create-qr-code/?size=" + ancho + "x" + alto + "&data=" + encodeURIComponent(valor)
-        );
-        if (contenedor) contenedor.style.display = "";
-      } else if (contenedor) {
-        contenedor.style.display = "none";
-      }
-    });
   }
 
   function iniciar() {

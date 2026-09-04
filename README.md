@@ -67,30 +67,28 @@ Antes de publicar a producción, reemplaza los valores `"PENDIENTE_..."` con la 
 
 **Nunca** se debe colocar una `service_role key`, un token privado o un secreto de backend en este archivo: es código que corre en el navegador del usuario.
 
-## 4. Funcionalidades terminadas (funcionan ya, sin backend)
+## 4. Funcionalidades terminadas y REALES (ya conectadas a Supabase)
 
 - Navegación completa entre las 12 páginas, menú móvil funcional.
 - Acordeón de preguntas frecuentes + buscador de FAQ en tiempo real.
-- Formulario de registro de conductor con validación en vivo (campos obligatorios, formato de teléfono/correo, checkbox de términos) y mensaje de confirmación.
-- Formulario de contacto con la misma validación.
-- Botones de WhatsApp, descarga de app y redes sociales que se activan/desactivan automáticamente según `config.js` (evita enlaces rotos o falsos).
-- SEO on-page: titles, meta descriptions, Open Graph, `sitemap.xml`, `robots.txt`, URLs amigables, jerarquía de encabezados.
-- Diseño responsive (móvil, tablet, escritorio), accesible (foco visible, `prefers-reduced-motion`, contraste), sin scroll horizontal.
-- Página 404 personalizada.
-- Estructura lista para PWA y para CMS de noticias (no implementadas todavía, ver abajo).
+- **Formulario de registro de conductor**: guarda de verdad en la tabla `conductor_solicitudes` de Supabase, incluyendo la subida de licencia, tarjeta de propiedad y SOAT al bucket privado `conductor-documentos`.
+- **Formulario de contacto**: guarda de verdad en la tabla `mensajes_contacto` de Supabase.
+- **Contenido editable (CMS)**: los textos principales del sitio (marcados con `data-cms`) se cargan desde la tabla `sitio_web_contenido` de Supabase, editable desde App Admin.
+- **Noticias**: la página consulta la tabla `noticias_sitio` (solo artículos con `publicado = true`) y muestra el mensaje "Muy pronto" automáticamente mientras esté vacía.
+- Botones de WhatsApp, descarga de app y redes sociales que se activan/desactivan automáticamente según `config.js`.
+- SEO on-page, sitemap, robots.txt, 404 personalizada, accesibilidad y diseño responsive.
 
 ## 5. Funcionalidades que requieren backend (pendientes)
 
 Los formularios están **listos para conectarse** pero hoy solo simulan el envío (no se pierden datos, pero tampoco se guardan). El punto exacto de integración está marcado con `TODO(backend)` en `js/main.js`, dentro de `initFormValidation`.
 
 Pendiente de conectar:
-- [ ] Envío real del formulario de registro de conductor → tabla de Supabase o endpoint propio (ej. `driver_applications` / `conductores`).
-- [ ] Envío real del formulario de contacto → tabla `mensajes_contacto` o servicio de email transaccional.
+- [ ] Pantalla en App Admin para ver y **aceptar/rechazar** las solicitudes de `conductor_solicitudes` (siguiente paso que vamos a construir).
+- [ ] Pantalla en App Admin para ver los mensajes de `mensajes_contacto`.
+- [ ] Publicar artículos reales en la tabla `noticias_sitio` (desde Supabase directamente o desde App Admin).
 - [ ] Autenticación de usuarios (si el sitio llega a tener zona de cuenta).
-- [ ] Blog/Noticias: conectar un CMS (o una tabla de Supabase) para publicar contenido real.
-- [ ] Mapa real (Google Maps/Mapbox) en las secciones visuales — hoy son ilustraciones SVG, no mapas interactivos.
+- [ ] Mapa real (Google Maps/Mapbox) en las secciones visuales — hoy son ilustraciones/fotos, no mapas interactivos.
 - [ ] Analítica real (Google Analytics / Search Console) — falta el ID de medición.
-- [ ] Carga de documentos en el formulario de conductor (licencia, tarjeta de propiedad, SOAT) — el campo está marcado como "disponible próximamente".
 
 ## 6. Cómo desplegarlo a producción
 

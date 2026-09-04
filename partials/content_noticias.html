@@ -10,10 +10,40 @@
 
 <section class="section">
   <div class="container">
-    <div class="card" style="max-width:640px; text-align:center; padding:56px 32px;">
+    <div id="noticias-lista" class="card-grid card-grid--3" hidden></div>
+    <div id="noticias-vacio" class="card" style="max-width:640px; text-align:center; padding:56px 32px;">
       <h3>Muy pronto</h3>
       <p>Estamos preparando esta sección. Cuando publiquemos noticias, actualizaciones de la aplicación y consejos de seguridad, los encontrarás aquí.</p>
       <a href="contacto.html" class="btn btn-outline" style="margin-top:8px;">Suscribirme a novedades</a>
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    var cfg = window.LLEVAMEQ_CONFIG || {};
+    if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf("PENDIENTE") === 0) return;
+    var url = cfg.SUPABASE_URL.replace(/\/$/, "") + "/rest/v1/noticias_sitio?select=*&publicado=eq.true&order=creado_en.desc";
+    fetch(url, { headers: { apikey: cfg.SUPABASE_ANON_KEY, Authorization: "Bearer " + cfg.SUPABASE_ANON_KEY } })
+      .then(function (res) { return res.ok ? res.json() : []; })
+      .then(function (posts) {
+        if (!posts || !posts.length) return;
+        var lista = document.getElementById("noticias-lista");
+        var vacio = document.getElementById("noticias-vacio");
+        posts.forEach(function (post) {
+          var card = document.createElement("div");
+          card.className = "card";
+          var img = post.imagen_url ? '<img src="' + post.imagen_url + '" alt="" style="width:100%;border-radius:8px;margin-bottom:14px;">' : "";
+          card.innerHTML = img + "<h3></h3><p></p>";
+          card.querySelector("h3").textContent = post.titulo || "";
+          card.querySelector("p").textContent = post.resumen || "";
+          lista.appendChild(card);
+        });
+        lista.hidden = false;
+        vacio.hidden = true;
+      })
+      .catch(function (err) { console.error("No se pudieron cargar las noticias:", err); });
+  });
+})();
+</script>
